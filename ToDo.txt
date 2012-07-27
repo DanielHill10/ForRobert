@@ -1,0 +1,24 @@
+﻿Hi Daniel,
+
+I have some ideas for ways that we can expand this simple game.  
+I have sketched them out below, we probably won't end up with world of Warcraft, but we should end up with something playable.
+
+1) Team Class to manage team members
+2) AreAllAlive should be moved to new team class
+3) TeamHit method should be moved to the new class
+
+4) New GameBoardClass to track position of team members
+5) Game Board should have spawn points for Teams.
+6) When a team is killed a new version of that team should spawn at the spawn point.
+
+7) Teams should randomly patrol the game board.
+8) Teams will battle when they are on Adjacent positions in the Gameboard.
+
+9) Simple Graphical representation of the gameboard.
+10) Simple Graphical representation of team members.
+11) Simple Graphical representation of Attacks
+
+12) Player controlled team!!!
+13) Two player controlled team
+14) Network interface for two players on two different machines
+15) Increase player count.
