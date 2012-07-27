@@ -8,7 +8,7 @@
 
         public static int CalculateDamage(int attackValue)
         {
-            return Rng.Next() * attackValue;
+            return (1 / Rng.Next()) * attackValue;
         }
     }
 }
