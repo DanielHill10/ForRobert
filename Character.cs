@@ -8,28 +8,33 @@ namespace Tutorial1
             Name = name;
             Health = health;
         }
+
         public int Damage
         {
             get;
             private set;
         }
+
         public string Name
         {
             get;
             private set;
         }
+
         public int Health
         {
             get;
             private set;
         }
-        public bool Isstillalive
+
+        public bool IsStillAlive
         {
             get
             {
                 return this.Health > 0;
             }
         }
+
         public string HealthString
         {
             get
@@ -37,15 +42,17 @@ namespace Tutorial1
                 return string.Format("{0}'s health is {1}.", this.Name, this.Health);
             }
         }
+
         public string Hit(Character otherCharacter) 
         {
-            if (!this.Isstillalive)
+            if (!this.IsStillAlive)
             {
-                return string.Format("{0} cannot hit {1} becasue he is dead",this.Name,otherCharacter.Name);
+                return string.Format("{0} cannot hit {1} becasue he is dead", this.Name, otherCharacter.Name);
             }
+
             var damage = RandomNumberGenerator.CalculateDamage(this.Damage);
             otherCharacter.Health = otherCharacter.Health - damage;
-            return string.Format("{0} hits {1} for {2} hitpoints",this.Name,otherCharacter.Name,damage);
+            return string.Format("{0} hits {1} for {2} hitpoints", this.Name, otherCharacter.Name, damage);
         }
     }
 }

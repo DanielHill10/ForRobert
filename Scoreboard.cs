@@ -1,6 +1,6 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="Scoreboard.cs" company="">
-// TODO: Update copyright text.
+// <copyright file="Scoreboard.cs" company="DPHGames">
+// Copyright DPHGames (C)
 // </copyright>
 // -----------------------------------------------------------------------
 
@@ -8,9 +8,6 @@ namespace Tutorial1
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-
 
     public class Scoreboard
     {
@@ -55,9 +52,26 @@ namespace Tutorial1
             foreach (var teamMember in TeamMembers)
             {
                 teamMemberIndex++;
+                Console.ForegroundColor = this.GetColour(teamMember);
                 Console.SetCursorPosition(Position.Left, Position.Top + teamMemberIndex);
                 Console.Write("{0}: {1}", teamMember.Name, teamMember.Health);
             }
+            Console.ForegroundColor = ConsoleColor.White;
+        }
+
+        private ConsoleColor GetColour(Character character)
+        {
+            if (character.Health < 5000)
+            {
+                return ConsoleColor.Red;
+            }
+
+            if (character.Health < 10000)
+            {
+                return ConsoleColor.Yellow;
+            }
+
+            return ConsoleColor.DarkGreen;
         }
     }
 

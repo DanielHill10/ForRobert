@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,53 +16,42 @@ namespace Tutorial1
             scoreBoard.AddTeam(heros);
             scoreBoard.AddTeam(monsters);
 
-            // Console.WriteLine(" A monster appears!");
-            //outputteamhealth(heros);
-            //outputteamhealth(monsters);
-            // Console.ReadLine();
             do
             {
+                Console.Clear();
                 Console.SetCursorPosition(0, 15);
                 TeamHit(heros, monsters);
                 TeamHit(monsters, heros);
-                outputteamhealth(heros);
-                outputteamhealth(monsters);
                 scoreBoard.UpdateBoard();
-                // Console.WriteLine();
                 Console.ReadLine();
             }
-            while (!areallteammembersdead(heros)&& !areallteammembersdead(monsters));
+            while (!areallteammembersdead(heros) && !areallteammembersdead(monsters));
             Console.ReadLine();
         }
-        private static void outputteamhealth(List<Character> characters)
-        {
-            foreach (var Character in characters)
-            {
-                Console.WriteLine(Character.HealthString);
-            }
-        }
+
         private static bool areallteammembersdead(List<Character> characters)
         {
             foreach (var character in characters)
             {
-                if (character.Isstillalive)
+                if (character.IsStillAlive)
                 {
                     return false;
                 }
             }
             return true;
         }
+
         private static void TeamHit(List<Character> attackers, List<Character> defenders)
         {
             foreach (var attacker in attackers)
             {
-                if (!attacker.Isstillalive)
+                if (!attacker.IsStillAlive)
                 {
                     continue;
                 }
                 foreach (var defender in defenders)
                 {
-                    if (defender.Isstillalive)
+                    if (defender.IsStillAlive)
                     {
                         Console.WriteLine(attacker.Hit(defender));
                         break;
@@ -69,6 +59,7 @@ namespace Tutorial1
                 }
             }
         }
+
         private static List<Character> CreateMonsters()
         {
             var monsters = new List<Character>();
