@@ -47,5 +47,15 @@ namespace Tutorial1
             Console.ReadLine();
         }
 
+
+        private List<Character> CreateMonsters()
+        {
+            
+        }
+
+        private List<Character> CreateHeros()
+        {
+            
+        }
     }
 }
