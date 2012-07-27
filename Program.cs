@@ -43,12 +43,13 @@ namespace Tutorial1
             Console.WriteLine();
             do
             {
-                
-                herohealth = herohealth - monsterdamage / 2;
-                monsterattack = "The hero blocks half the damage, the monsters attack only deals " + monsterdamage / 2 + ".";
+                var monsterdamagethisturn = RandomNumberGenerator.CalculateDamage(monsterdamage);
+                var herodamagethisturn = RandomNumberGenerator.CalculateDamage(herodamage);
+                herohealth = herohealth - monsterdamagethisturn;
+                monsterattack = "The hero blocks half the damage, the monsters attack only deals " + monsterdamagethisturn + ".";
                 Console.WriteLine(monsterattack);
-                Console.WriteLine("The hero attacks the monster dealing {0} damage", herodamage);
-                monsterhealth = monsterhealth - herodamage;
+                Console.WriteLine("The hero attacks the monster dealing {0} damage", herodamagethisturn);
+                monsterhealth = monsterhealth - herodamagethisturn;
                 results = string.Format("The heros health is {0} and the monsters health is {1}", herohealth, monsterhealth);
                 Console.WriteLine();
                 Console.WriteLine(results);
