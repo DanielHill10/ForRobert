@@ -9,53 +9,77 @@ namespace Tutorial1
     {
         static void Main(string[] args)
         {
-            var monster = new Character();
-            monster.Health = 40000;
-            monster.Damage = 400;
-            monster.Name = "Monster";
-            var hero = new Character();
-            hero.Health = 100000;
-            hero.Damage = 900;
-            hero.Name = "Thor";
-            var monster2 = new Character();
-            monster2.Health = 20000;
-            monster2.Damage = 1000;
-            monster2.Name = "Little Bugar";
-
+            var heros = CreateHeros();
+            var monsters = CreateMonsters();
             Console.WriteLine(" A monster appears!");
-            Console.WriteLine(hero.HealthString);
-            Console.WriteLine(monster.HealthString);
+            outputteamhealth(heros);
+            outputteamhealth(monsters);
             Console.ReadLine();
             do
             {
-                Console.WriteLine(monster.Hit (hero));
-                if (monster.Isstillalive)
-                {
-                    Console.WriteLine(hero.Hit(monster));
-                }
-                else
-                {
-                    Console.WriteLine(hero.Hit(monster2));
-                }
-                Console.WriteLine(monster2.Hit(hero));
-                Console.WriteLine(hero.HealthString);
-                Console.WriteLine(monster.HealthString);
-                Console.WriteLine(monster2.HealthString);
+                TeamHit(heros, monsters);
+                TeamHit(monsters, heros);
+                outputteamhealth(heros);
+                outputteamhealth(monsters);
                 Console.WriteLine();
             }
-            while (hero.Isstillalive && (monster.Isstillalive||monster2.Isstillalive));
+            while (!areallteammembersdead(heros)&& !areallteammembersdead(monsters));
             Console.ReadLine();
         }
-
-
-        private List<Character> CreateMonsters()
+        private static void outputteamhealth(List<Character> characters)
         {
-            
+            foreach (var Character in characters)
+            {
+                Console.WriteLine (Character.HealthString);
+            }
+        }
+        private static bool areallteammembersdead(List<Character> characters)
+        {
+            foreach (var character in characters)
+            {
+                if (character.Isstillalive)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+        private static void TeamHit(List<Character> attackers, List<Character> defenders)
+        {
+            foreach (var attacker in attackers)
+            {
+                if (!attacker.Isstillalive)
+                {
+                    continue;
+                }
+                foreach (var defender in defenders)
+                {
+                    if (defender.Isstillalive)
+                    {
+                        Console.WriteLine(attacker.Hit(defender));
+                        break;
+                    }
+                }
+            }
+        }
+        private static List<Character> CreateMonsters()
+        {
+            var monsters = new List<Character>();
+            var monster = new Character("Monster", 40000, 2000);
+            var monster2 = new Character("Little Bugar", 20000, 300);
+            monsters.Add(monster);
+            monsters.Add(monster2);
+            return monsters;
         }
 
-        private List<Character> CreateHeros()
+        private static List<Character> CreateHeros()
         {
-            
+            var heros = new List<Character>();
+            var thor = new Character("Thor", 100000, 400);
+            var hulk = new Character("Hulk", 300000, 20);
+            heros.Add(hulk);
+            heros.Add(thor);
+            return heros;
         }
     }
 }

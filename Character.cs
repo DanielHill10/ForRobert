@@ -2,20 +2,26 @@ namespace Tutorial1
 {
     public class Character
     {
+        public Character(string name, int health, int damage)
+        {
+            Damage = damage;
+            Name = name;
+            Health = health;
+        }
         public int Damage
         {
             get;
-            set;
+            private set;
         }
         public string Name
         {
             get;
-            set;
+            private set;
         }
         public int Health
         {
             get;
-            set;
+            private set;
         }
         public bool Isstillalive
         {
