@@ -11,17 +11,24 @@ namespace Tutorial1
         {
             var heros = CreateHeros();
             var monsters = CreateMonsters();
-            Console.WriteLine(" A monster appears!");
-            outputteamhealth(heros);
-            outputteamhealth(monsters);
-            Console.ReadLine();
+            var scoreBoard = new Scoreboard();
+            scoreBoard.AddTeam(heros);
+            scoreBoard.AddTeam(monsters);
+
+            // Console.WriteLine(" A monster appears!");
+            //outputteamhealth(heros);
+            //outputteamhealth(monsters);
+            // Console.ReadLine();
             do
             {
+                Console.SetCursorPosition(0, 15);
                 TeamHit(heros, monsters);
                 TeamHit(monsters, heros);
                 outputteamhealth(heros);
                 outputteamhealth(monsters);
-                Console.WriteLine();
+                scoreBoard.UpdateBoard();
+                // Console.WriteLine();
+                Console.ReadLine();
             }
             while (!areallteammembersdead(heros)&& !areallteammembersdead(monsters));
             Console.ReadLine();
@@ -30,7 +37,7 @@ namespace Tutorial1
         {
             foreach (var Character in characters)
             {
-                Console.WriteLine (Character.HealthString);
+                Console.WriteLine(Character.HealthString);
             }
         }
         private static bool areallteammembersdead(List<Character> characters)
