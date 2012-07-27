@@ -15,7 +15,7 @@ namespace Tutorial1
             monster.Name = "Monster";
             var hero = new Character();
             hero.Health = 100000;
-            hero.Damage = 800;
+            hero.Damage = 900;
             hero.Name = "Batman";
             var monster2 = new Character();
             monster2.Health = 20000;
