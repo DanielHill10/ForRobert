@@ -67,15 +67,17 @@ namespace Tutorial1
             var monsters = new List<Character>();
             var monster = new Character("Monster", 40000, 2000);
             var monster2 = new Character("Little Bugar", 20000, 300);
+            var monster3 = new Character("Loki", 15000, 600);
             monsters.Add(monster);
             monsters.Add(monster2);
+            monsters.Add(monster3);
             return monsters;
         }
 
         private static List<Character> CreateHeros()
         {
             var heros = new List<Character>();
-            var thor = new Character("Thor", 100000, 400);
+            var thor = new Character("Thor", 100000, 1000);
             var hulk = new Character("Hulk", 300000, 20);
             heros.Add(hulk);
             heros.Add(thor);
