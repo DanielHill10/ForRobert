@@ -31,7 +31,6 @@ namespace Tutorial1
 
             heroattack = string.Format("The hero attacks the monster for {0} hp of damage.", herodamage);
             monsterattack = string.Format("The monster attacks the hero for {0} hp of damage.", monsterdamage);
-            results = "The heros health is " + herohealth + " and the monsters health is " + monsterhealth + ".";
             results = string.Format("The heros health is {0} and the monsters health is {1}", herohealth, monsterhealth);
 
             Console.WriteLine(heroattack);
