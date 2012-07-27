@@ -9,74 +9,89 @@ namespace Tutorial1
     {
         static void Main(string[] args)
         {
-            int herohealth, monsterhealth;
-            int herodamage, monsterdamage;
-            string heroattack;
-            string monsterattack;
-            string results;
-
-            herohealth = 60;
-            monsterhealth = 40;
-            herodamage = 6;
-            monsterdamage = 4;
+            var monster = new Character();
+            monster.Health = 40000;
+            monster.Damage = 400;
+            monster.Name = "Monster";
+            var hero = new Character();
+            hero.Health = 100000;
+            hero.Damage = 800;
+            hero.Name = "Batman";
+            var monster2 = new Character();
+            monster2.Health = 20000;
+            monster2.Damage = 1000;
+            monster2.Name = "Little Bugar";
 
             Console.WriteLine(" A monster appears!");
-            Console.WriteLine("The heros health is {0} and the monsters health is {1}", herohealth, monsterhealth);
-            
+            Console.WriteLine(hero.HealthString);
+            Console.WriteLine(monster.HealthString);
             Console.ReadLine();
-            
-            monsterhealth = monsterhealth - herodamage;
-            herohealth = herohealth - monsterdamage;
-
-            heroattack = string.Format("The hero attacks the monster for {0} hp of damage.", herodamage);
-            monsterattack = string.Format("The monster attacks the hero for {0} hp of damage.", monsterdamage);
-            results = string.Format("The heros health is {0} and the monsters health is {1}", herohealth, monsterhealth);
-
-            Console.WriteLine(heroattack);
-            Console.WriteLine(monsterattack);
-            Console.WriteLine(results);
-            Console.ReadLine(); 
-
-            monsterhealth = monsterhealth - herodamage;
-            heroattack = "The hero critically strike dealing " + herodamage*2 + "hp of damage!";
-            Console.WriteLine(heroattack);
-            Console.WriteLine();
             do
             {
-                var monsterdamagethisturn = RandomNumberGenerator.CalculateDamage(monsterdamage);
-                var herodamagethisturn = RandomNumberGenerator.CalculateDamage(herodamage);
-                herohealth = herohealth - monsterdamagethisturn;
-                monsterattack = "The hero blocks half the damage, the monsters attack only deals " + monsterdamagethisturn + ".";
-                Console.WriteLine(monsterattack);
-                Console.WriteLine("The hero attacks the monster dealing {0} damage", herodamagethisturn);
-                monsterhealth = monsterhealth - herodamagethisturn;
-                results = string.Format("The heros health is {0} and the monsters health is {1}", herohealth, monsterhealth);
+                Console.WriteLine(monster.Hit (hero));
+                if (monster.Isstillalive)
+                {
+                    Console.WriteLine(hero.Hit(monster));
+                }
+                else
+                {
+                    Console.WriteLine(hero.Hit(monster2));
+                }
+                Console.WriteLine(monster2.Hit(hero));
+                Console.WriteLine(hero.HealthString);
+                Console.WriteLine(monster.HealthString);
+                Console.WriteLine(monster2.HealthString);
                 Console.WriteLine();
-                Console.WriteLine(results);
             }
-            while (herohealth > 0 && monsterhealth > 0);
-
-            
-            
-            
-            
-            
-            //if (monsterhealth < 0)
-            //{
-            //    Console.WriteLine("You have killed the monster!");
-            //}
-            //else
-            //{
-            //    monsterdamage = monsterdamage / 2;
-            //    herohealth = herohealth - monsterdamage;
-            //    monsterattack = "The hero blocks half the damage, the monsters attack only deals " + monsterdamage + ".";
-            //    Console.WriteLine(monsterattack);
-            //    results = "The heros health is " + herohealth + " and the monsters health is " + monsterhealth + ".";
-            //    Console.WriteLine();
-            //    Console.WriteLine(results);
-            //}
+            while (hero.Isstillalive && (monster.Isstillalive||monster2.Isstillalive));
             Console.ReadLine();
         }
 
     }
+    public class Character
+    {
+        public int Damage
+        {
+            get;
+            set;
+        }
+        public string Name
+        {
+            get;
+            set;
+        }
+        public int Health
+        {
+            get;
+            set;
+        }
+        public bool Isstillalive
+        {
+            get
+            {
+                return Health > 0;
+            }
+        }
+        public string HealthString
+        {
+            get
+            {
+                return string.Format("{0}'s health is {1}.", Name, Health);
+            }
+        }
+        public string Hit(Character otherCharacter) 
+        {
+            if (!this.Isstillalive)
+            {
+                return string.Format("{0} cannot hit {1} becasue he is dead",Name,otherCharacter.Name);
+            }
+            var damage = RandomNumberGenerator.CalculateDamage(this.Damage);
+            otherCharacter.Health = otherCharacter.Health - damage;
+            return string.Format("{0} hits {1} for {2} hitpoints",this.Name,otherCharacter.Name,damage);
+        }
+    }
+
+
+
+
 }
