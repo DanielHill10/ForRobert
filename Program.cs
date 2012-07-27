@@ -15,19 +15,18 @@ namespace Tutorial1
             string monsterattack;
             string results;
 
-            herohealth = 30;
-            monsterhealth = 15;
+            herohealth = 60;
+            monsterhealth = 40;
             herodamage = 6;
             monsterdamage = 4;
 
             Console.WriteLine(" A monster appears!");
-            Console.WriteLine(" The hero's health is " + herohealth + " and the monsters health is " + monsterhealth+ ".");
+            Console.WriteLine("The heros health is {0} and the monsters health is {1}", herohealth, monsterhealth);
+            
             Console.ReadLine();
             
             monsterhealth = monsterhealth - herodamage;
             herohealth = herohealth - monsterdamage;
-
-
 
             heroattack = string.Format("The hero attacks the monster for {0} hp of damage.", herodamage);
             monsterattack = string.Format("The monster attacks the hero for {0} hp of damage.", monsterdamage);
@@ -38,24 +37,43 @@ namespace Tutorial1
             Console.WriteLine(results);
             Console.ReadLine(); 
 
-            monsterhealth = monsterhealth - herodamage*2;
+            monsterhealth = monsterhealth - herodamage;
             heroattack = "The hero critically strike dealing " + herodamage*2 + "hp of damage!";
             Console.WriteLine(heroattack);
             Console.WriteLine();
-            if (monsterhealth < 0)
+            do
             {
-                Console.WriteLine("You have killed the monster!");
-            }
-            else
-            {
-                monsterdamage = monsterdamage / 2;
-                herohealth = herohealth - monsterdamage;
-                monsterattack = "The hero blocks half the damage, the monsters attack only deals " + monsterdamage + ".";
+                
+                herohealth = herohealth - monsterdamage / 2;
+                monsterattack = "The hero blocks half the damage, the monsters attack only deals " + monsterdamage / 2 + ".";
                 Console.WriteLine(monsterattack);
-                results = "The heros health is " + herohealth + " and the monsters health is " + monsterhealth + ".";
+                Console.WriteLine("The hero attacks the monster dealing {0} damage", herodamage);
+                monsterhealth = monsterhealth - herodamage;
+                results = string.Format("The heros health is {0} and the monsters health is {1}", herohealth, monsterhealth);
                 Console.WriteLine();
                 Console.WriteLine(results);
             }
+            while (herohealth > 0 && monsterhealth > 0);
+
+            
+            
+            
+            
+            
+            //if (monsterhealth < 0)
+            //{
+            //    Console.WriteLine("You have killed the monster!");
+            //}
+            //else
+            //{
+            //    monsterdamage = monsterdamage / 2;
+            //    herohealth = herohealth - monsterdamage;
+            //    monsterattack = "The hero blocks half the damage, the monsters attack only deals " + monsterdamage + ".";
+            //    Console.WriteLine(monsterattack);
+            //    results = "The heros health is " + herohealth + " and the monsters health is " + monsterhealth + ".";
+            //    Console.WriteLine();
+            //    Console.WriteLine(results);
+            //}
             Console.ReadLine();
         }
 
